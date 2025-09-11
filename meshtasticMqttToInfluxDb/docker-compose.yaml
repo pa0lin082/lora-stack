@@ -1,0 +1,10 @@
+
+
+services:
+  mqtt2influxdb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: 
+      - path: .env
+      
