@@ -1,0 +1,181 @@
+# File di ambiente e segreti
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Directory di dipendenze
+node_modules/
+bower_components/
+vendor/
+packages/
+.pnp/
+.pnp.js
+
+# Build e output
+dist/
+build/
+out/
+target/
+bin/
+obj/
+*.jar
+*.war
+*.ear
+*.class
+
+# Cache e temporary
+.cache/
+.tmp/
+.temp/
+tmp/
+temp/
+*.tmp
+*.temp
+.nuxt/
+.next/
+.vite/
+
+# IDE e editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Coverage e test
+coverage/
+.nyc_output/
+.coverage/
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Docker
+.dockerignore
+
+# Git
+.git/
+*.orig
+
+# Sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Python specifico
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node.js specifico
+npm-debug.log
+yarn-error.log
+.npm
+.yarn-integrity
+
+# Java specifico
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+# .NET specifico
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.docstates
+
+# Ruby specifico
+*.gem
+*.rbc
+.bundle/
+.config/
+coverage/
+InstalledFiles
+lib/bundler/man/
+_yardoc/
+doc/
+rdoc/
+.yardoc/
+
+# Go specifico
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Rust specifico
+target/
+Cargo.lock
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# Compressed files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+
+# Certificates
+*.crt
+*.cer
+*.der
+
+**/generated
+
+# Altri file comuni da ignorare
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

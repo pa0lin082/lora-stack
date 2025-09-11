@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+paho-mqtt = "==1.6.1"
+protobuf = ">=3.20.0"
+grpcio-tools = ">=1.50.0"
+influxdb-client = ">=1.36.0"
+python-dotenv = "*"
+
+[dev-packages]
+pytest-cov = "*"
+pytest = "*"
+python-dotenv = {extras = ["cli"], version = "*"}
+
+[requires]
+python_version = "3.13"

@@ -1,0 +1,3 @@
+[submodule "meshtasticMqttToInfluxDb/protobufs"]
+	path = meshtasticMqttToInfluxDb/protobufs
+	url = https://github.com/meshtastic/protobufs.git
