@@ -24,8 +24,8 @@ RUN pipenv install --deploy
 
 # Copy application code
 COPY . .
-RUN sh scripts/generate_proto.sh
-
+RUN scripts/generate_proto.sh
+RUN find meshtasticMqttToInfluxDb
 # Run the application
 CMD ["pipenv", "run", "python", "meshtasticMqttToInfluxDb"]
 
