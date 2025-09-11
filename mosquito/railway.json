@@ -1,0 +1,10 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE"
+    },
+    "env": {
+      "MOSQUITTO_USERNAME": "admin",
+      "MOSQUITTO_PASSWORD": "${{secret(16)}}"
+    }
+}
