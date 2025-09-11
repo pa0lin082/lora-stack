@@ -25,6 +25,7 @@ RUN pipenv install --deploy
 # Copy application code
 COPY . .
 
+ENV PYTHONUNBUFFERED=1
 # Run the application
 CMD ["pipenv", "run", "python", "meshtasticMqttToInfluxDb"]
 
