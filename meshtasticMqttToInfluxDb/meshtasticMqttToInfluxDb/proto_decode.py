@@ -11,7 +11,6 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 import meshtastic
 
 def get_available_protos():
-
     """
     Restituisce un dizionario di tutti i protobuf disponibili per il decoding.
     
@@ -23,32 +22,14 @@ def get_available_protos():
     import importlib
     
     protos = {}
-
-    
-    # Percorso ai file protobuf generati
-    proto_path = os.path.join(os.path.dirname(__file__), 'generated', 'meshtastic')
-    
-    # Trova tutti i file *_pb2.py
-    proto_files = glob.glob(os.path.join(proto_path, '*_pb2.py'))
-    
-    for proto_file in proto_files:
-        module_name = os.path.basename(proto_file).replace('.py', '')
-
-        try:
-            module_to_import = f'generated.meshtastic.{module_name}'
-            module = importlib.import_module(module_to_import)
+    for module_name,module in meshtastic.protobuf.__dict__.items():
+        # Trova tutte le classi di messaggi nel modulo
+        for attr_name in dir(module):
+            attr = getattr(module, attr_name)
             
-            # Trova tutte le classi di messaggi nel modulo
-            for attr_name in dir(module):
-                attr = getattr(module, attr_name)
-             
-                # Verifica se è una classe di messaggio protobuf
-                if inspect.isclass(attr) and issubclass(attr, _message.Message):
-                    protos[attr.__name__] = attr
-                    
-        except ImportError as e:
-            print(f"Errore nell'importazione di {module_name}: {e}")
-            continue
+            # Verifica se è una classe di messaggio protobuf
+            if inspect.isclass(attr) and issubclass(attr, _message.Message):
+                protos[attr.__name__] = attr
     
     return protos
 protos_map = get_available_protos()

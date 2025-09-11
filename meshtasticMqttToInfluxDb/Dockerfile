@@ -16,7 +16,7 @@ WORKDIR /app
 
 
 # Copy dependency files
-COPY Pipfile* ./
+COPY Pipfile ./
 
 # Install dependencies
 RUN pipenv install --deploy 
@@ -24,8 +24,7 @@ RUN pipenv install --deploy
 
 # Copy application code
 COPY . .
-RUN scripts/generate_proto.sh
-RUN find meshtasticMqttToInfluxDb
+
 # Run the application
 CMD ["pipenv", "run", "python", "meshtasticMqttToInfluxDb"]
 
