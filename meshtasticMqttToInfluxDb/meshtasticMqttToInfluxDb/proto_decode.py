@@ -8,7 +8,6 @@ from google.protobuf import message
 from google.protobuf import message as _message
 from google.protobuf.json_format import MessageToDict, MessageToJson
 
-sys.path.append(f'{os.path.dirname(__file__)}/generated')
 import meshtastic
 
 def get_available_protos():
