@@ -24,62 +24,33 @@ def get_available_protos():
     import importlib
     
     protos = {}
-    protosMap = {}
+
     
     # Percorso ai file protobuf generati
     proto_path = os.path.join(os.path.dirname(__file__), 'generated', 'meshtastic')
-    print(f"🔍 proto_path: {proto_path}")
     
     # Trova tutti i file *_pb2.py
     proto_files = glob.glob(os.path.join(proto_path, '*_pb2.py'))
     
     for proto_file in proto_files:
-        # Estrai il nome del modulo (es. mesh_pb2 da mesh_pb2.py)
         module_name = os.path.basename(proto_file).replace('.py', '')
-        print(f"🔍 module_name: {module_name}")
+
         try:
-            # Importa dinamicamente il modulo protobuf
-            # eval(f'from meshtastic import {module_name}')
-            # module = eval(f'{module_name}')
-            # module = meshtastic.__dict__[module_name]
-            # print(f"🔍 module: {module}")
-            # module = importlib.import_module(f'meshtastic',{module_name})
             module_to_import = f'generated.meshtastic.{module_name}'
-            print(f"🔍 module_to_import: {module_to_import}")
             module = importlib.import_module(module_to_import)
-            print(f"🔍 module: {module}")
             
             # Trova tutte le classi di messaggi nel modulo
-            # found = False
             for attr_name in dir(module):
                 attr = getattr(module, attr_name)
              
-                
                 # Verifica se è una classe di messaggio protobuf
                 if inspect.isclass(attr) and issubclass(attr, _message.Message):
-                # if (hasattr(attr, 'DESCRIPTOR') and 
-                #     hasattr(attr.DESCRIPTOR, 'name') and
-                #     not attr_name.startswith('_')):
-                    
-                #     # Usa il nome del descrittore come chiave
-                #     proto_name = attr.DESCRIPTOR.name
-
-                    # message_class  = importlib.import_module(f'meshtastic',{module_name})
-                    # print(f"🔍 message_class: {message_class}")
                     protos[attr.__name__] = attr
-                    # protosMap[attr.__name__] = f"{module_name}.{attr.__name__}"
-                    # found = True
-            # if found:
-            #     print(f"from meshtastic import {module_name}")
                     
         except ImportError as e:
             print(f"Errore nell'importazione di {module_name}: {e}")
             continue
     
-    # print("{")
-    # for k, v in protosMap.items():
-    #     print(f"'{k}': {v},")
-    # print("}")
     return protos
 protos_map = get_available_protos()
 
