@@ -327,6 +327,10 @@ def write_to_influxdb( data, timestamp=None):
             })
         elif data['type'] == 'position':
             point_dict['fields'].update(data['payload'])
+        elif data['type'] == 'text':
+            if data['payload'] and 'type' in data['payload'] and data['payload']['type'] == 'custom_metrics':
+                for metric in data['payload']['metrics']:
+                    point_dict['fields'][metric["name"]] = metric["value"]
         else:
             print(f"skipping message type: {data['type'] or 'unknown'}")
             # print(f"💾 Unknown type: {data['type']} \ndata: {json.dumps(data, indent=2, ensure_ascii=False)} \n point_dict: {json.dumps(point_dict, indent=2, ensure_ascii=False)}")
@@ -396,6 +400,7 @@ def on_message(client, userdata, msg):
     if payload_info['type'] == 'json':
         try:
             json_data = json.loads(payload_info['content'])
+            print(f"📦 JSON: {json.dumps(json_data, indent=2, ensure_ascii=False)}")
             data_to_save = json_data
         except json.JSONDecodeError:
             print(f"❌ JSONDecodeError Contenuto: {payload_info['content']}")
