@@ -104,6 +104,7 @@ def prepare_influxdb_point(data, timestamp=None):
             point_dict['fields'].update(data['payload'])
         elif data['type'] == 'text':
             if data['payload'] and 'type' in data['payload'] and data['payload']['type'] == 'custom_metrics':
+                point_dict['measurement'] = 'custom_metrics'
                 for metric in data['payload']['metrics']:
                     point_dict['fields'][metric["name"]] = metric["value"]
         else:   
