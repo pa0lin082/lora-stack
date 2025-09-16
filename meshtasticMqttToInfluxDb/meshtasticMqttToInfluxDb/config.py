@@ -23,4 +23,7 @@ assert config['INFLUXDB_BUCKET'] is not None, "INFLUXDB_BUCKET is not set"
 
 config['MQTT_PORT'] = int(config['MQTT_PORT'])
 
+for k,v in config.items():
+    print(f"config -> {k}: {v}")
+
 

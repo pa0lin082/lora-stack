@@ -19,10 +19,10 @@ try:
     from influxdb_client import InfluxDBClient, Point
     from influxdb_client.client.write_api import SYNCHRONOUS
     INFLUXDB_AVAILABLE = True
-    print("✅ InfluxDB client disponibile!")
+    print("✅ InfluxDB library disponibile!")
 except ImportError as e:
     INFLUXDB_AVAILABLE = False
-    print(f"⚠️  InfluxDB client non disponibile: {e}")
+    print(f"⚠️  InfluxDB library non disponibile: {e}")
     print("💡 Installa con: pipenv install influxdb-client")
 
 try:
