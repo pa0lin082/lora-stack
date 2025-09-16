@@ -48,18 +48,6 @@ except ImportError as e:
     print(f"⚠️  Protobuf non disponibile: {e}")
     print("💡 Esegui: pipenv install && pipenv run python -m grpc_tools.protoc --python_out=generated --proto_path=protobufs protobufs/meshtastic/*.proto")
     sys.exit()
-# Configurazione MQTT
-# config['MQTT_HOST'] = "trolley.proxy.rlwy.net"
-# config['MQTT_PORT'] = 57275
-# config['MQTT_USERNAME'] = "admin"
-# config['MQTT_PASSWORD'] = "admin"
-# config['MQTT_ROOT_TOPIC'] = "msh/EU_868"
-
-
-# config['INFLUXDB_URL'] = "https://influxdb-production-7b25.up.railway.app/"
-# config['INFLUXDB_TOKEN'] = "MBSzlUFYny_fSXJkwYHiBZdaANDZViAtdhyAONU1TheDnJQqerM1sEJgw5OI7tC21Fw6rD5e_KAONwn0vYX2oA=="
-# config['INFLUXDB_ORG'] = "Podere"
-# config['INFLUXDB_BUCKET'] = "mesh"
 
 # Client InfluxDB globale
 influx_client = None
@@ -179,8 +167,9 @@ def init_influxdb():
         return False
     
     try:
+        url = f"{config['INFLUXDB_HOST']}:{config['INFLUXDB_PORT']}"
         influx_client = InfluxDBClient(
-            url=config['INFLUXDB_URL'],
+            url=url,
             token=config['INFLUXDB_TOKEN'],
             org=config['INFLUXDB_ORG']
         )
