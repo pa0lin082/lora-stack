@@ -1,7 +1,7 @@
 FROM bunkeriot/bunkerm:latest
 
 # Copy custom configuration file
-COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
+# COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
 
 # RUN mkdir -p /mosquitto/data /mosquitto/log && chown -R mosquitto:mosquitto /mosquitto/data /mosquitto/log
 
