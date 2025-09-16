@@ -177,7 +177,7 @@ def init_influxdb():
         # Testa la connessione
         health = influx_client.health()
         if health.status == "pass":
-            print(f"✅ Connesso a InfluxDB: {config['INFLUXDB_URL']}")
+            print(f"✅ Connesso a InfluxDB: {url}")
             write_api = influx_client.write_api(write_options=SYNCHRONOUS)
             return True
         else:
