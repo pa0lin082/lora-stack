@@ -8,4 +8,4 @@ codegen:
 	./scripts/generate_proto.sh
 
 run:
-	pipenv run python meshtasticMqttToInfluxDb
+	pipenv run python meshtasticMqttToInfluxDb 
