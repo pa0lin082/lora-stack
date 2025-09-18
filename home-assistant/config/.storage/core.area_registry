@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "minor_version": 8,
+  "key": "core.area_registry",
+  "data": {
+    "areas": [
+      {
+        "aliases": [],
+        "floor_id": null,
+        "humidity_entity_id": null,
+        "icon": null,
+        "id": "soggiorno",
+        "labels": [],
+        "name": "Soggiorno",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "2025-09-18T06:59:03.738362+00:00",
+        "modified_at": "2025-09-18T06:59:03.738363+00:00"
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "humidity_entity_id": null,
+        "icon": null,
+        "id": "cucina",
+        "labels": [],
+        "name": "Cucina",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "2025-09-18T06:59:03.738388+00:00",
+        "modified_at": "2025-09-18T06:59:03.738388+00:00"
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "humidity_entity_id": null,
+        "icon": null,
+        "id": "camera_da_letto",
+        "labels": [],
+        "name": "Camera da letto",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "2025-09-18T06:59:03.738400+00:00",
+        "modified_at": "2025-09-18T06:59:03.738400+00:00"
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "humidity_entity_id": null,
+        "icon": "mdi:battery-charging",
+        "id": "test",
+        "labels": [],
+        "name": "test",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "2025-09-18T07:35:27.555235+00:00",
+        "modified_at": "2025-09-18T07:35:27.555244+00:00"
+      }
+    ]
+  }
+}

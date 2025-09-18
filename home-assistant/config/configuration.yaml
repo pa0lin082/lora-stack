@@ -1,0 +1,54 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+logger:
+  default: warning
+  logs:
+    homeassistant.components.mqtt: debug
+
+mqtt:
+  sensor:
+    - name: "ba6a665c Voltage"
+      state_topic: "msh/EU_868/2/json/MeshPodere/!ba6a665c"
+      value_template: >
+        {% if value_json is defined and value_json.type == "telemetry" and value_json.payload is defined and value_json.payload.voltage is defined %}
+          {{ value_json.payload.voltage | float }}
+        {% else %}
+          {{ states('sensor.ba6a665c_voltage') | float(0) }}
+        {% endif %}
+      unit_of_measurement: 'V'
+  
+  device_tracker:
+    - name: "ba6a665c Position"
+      state_topic: "msh/EU_868/2/json/MeshPodere/!ba6a665c"
+      json_attributes_topic: "msh/EU_868/2/json/MeshPodere/!ba6a665c"
+      json_attributes_template: >
+        {% if value_json is defined and value_json.type == "position" and value_json.payload is defined %}
+          {% set payload = value_json.payload %}
+          {% if payload.latitude_i is defined and payload.longitude_i is defined %}
+            {
+              "latitude": {{ (payload.latitude_i / 10000000) | float }},
+              "longitude": {{ (payload.longitude_i / 10000000) | float }},
+              {% if payload.altitude is defined %}"altitude": {{ payload.altitude | int }},{% endif %}
+              {% if payload.precision_bits is defined %}"gps_accuracy": {{ payload.precision_bits | int }}{% endif %}
+            }
+          {% endif %}
+        {% endif %}
+      value_template: >
+        {% if value_json is defined and value_json.type == "position" %}
+          home
+        {% else %}
+          {{ states('device_tracker.ba6a665c_position') }}
+        {% endif %}
+      source_type: "gps"
+      payload_home: "home"
+      payload_not_home: "away"

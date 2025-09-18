@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "id": "elfo",
+        "name": "elfo",
+        "user_id": "4b0b4a31d3864ec698b2e0d2b91e2aa1",
+        "device_trackers": []
+      },
+      {
+        "id": "pippo",
+        "name": "Pippo",
+        "device_trackers": [],
+        "user_id": null,
+        "picture": null
+      },
+      {
+        "id": "ba_pos",
+        "name": "ba pos",
+        "device_trackers": [
+          "device_tracker.ba6a665c_position"
+        ],
+        "user_id": null,
+        "picture": null
+      }
+    ]
+  }
+}
