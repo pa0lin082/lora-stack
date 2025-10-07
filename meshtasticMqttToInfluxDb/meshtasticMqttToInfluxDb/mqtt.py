@@ -187,7 +187,7 @@ class MqttClient:
         try:
             result = self.client.publish(topic, payload, qos, retain)
             if result.rc == 0:
-                print(f"📤 Messaggio pubblicato su {topic}")
+                # print(f"📤 Messaggio pubblicato su {topic}")
                 return True
             else:
                 print(f"❌ Errore nella pubblicazione: {result.rc}")

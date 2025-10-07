@@ -167,7 +167,7 @@ def share_poit_for_home_assistant(point_dict):
     if point_dict['measurement'] in ['telemetry', 'custom_metrics']:
         for key, value in point_dict['fields'].items():
             topic = f"homeassitant/sensor/{node_id}/{key}"
-            print(f"🔍 topic: {topic} value: {value}")
+            # print(f"🔍 topic: {topic} value: {value}")
             mqtt_client.publish(topic, value)
         
 
