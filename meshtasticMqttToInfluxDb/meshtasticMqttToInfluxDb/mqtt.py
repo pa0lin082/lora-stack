@@ -75,12 +75,12 @@ class MqttClient:
             print("⚠️  Disconnessione inattesa! Tentativo di riconnessione...")
     
     def _on_message(self, client, userdata, msg):
-        print(f"📨 msg: {msg}")
+        # print(f"📨 msg: {msg}")
         """Callback chiamata quando viene ricevuto un messaggio."""
         try:
             
             
-            print(f"📨 Messaggio ricevuto su {msg.topic}")
+            # print(f"📨 Messaggio ricevuto su {msg.topic}")
             
             # Chiama il callback personalizzato se fornito
             if self.on_message_callback:

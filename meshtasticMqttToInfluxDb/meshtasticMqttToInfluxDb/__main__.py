@@ -108,7 +108,12 @@ def prepare_influxdb_point(data, timestamp=None):
                 for metric in data['payload']['metrics']:
                     point_dict['fields'][metric["name"]] = metric["value"]
             else:
-                print(f"Recived text message: {print_json(data)}")
+                print("📨📨📨 Text Message 📨📨📨")
+                print(f"From: {data['from']} ")
+                print(f"To: {data['to']}")
+                print(f"{data['payload']['text']}")
+                point_dict = None
+                # print(f"Recived text message: {print_json(data)}")
         else:   
             print(f"skipping message type: {data['type'] or 'unknown'}")
             # print(f"💾 Unknown type: {data['type']} \ndata: {json.dumps(data, indent=2, ensure_ascii=False)} \n point_dict: {json.dumps(point_dict, indent=2, ensure_ascii=False)}")
@@ -139,7 +144,7 @@ def try_to_import_message( data, timestamp=None):
     share_poit_for_home_assistant(point_dict)
 
     if args.dry_run:
-        # print(f"🚀 try_to_import_message dry-run -> point_dict: \n{print_json(point_dict)}")
+        print(f"🚀 try_to_import_message dry-run -> point_dict: \n{point_dict}")
         return
     
     
@@ -160,7 +165,7 @@ def share_poit_for_home_assistant(point_dict):
     """
     Condividi il punto per Home Assistant.
     """
-    print(f"🔍 share_poit_for_home_assistant: {point_dict}")
+    # print(f"🔍 share_poit_for_home_assistant: {point_dict}")
 
     node_id = point_dict['tags']['node_id']
 
@@ -176,11 +181,11 @@ def share_poit_for_home_assistant(point_dict):
 def on_mqtt_message_callback(msg):
     """Callback chiamata quando viene ricevuto un messaggio."""
     timestamp = get_utc_timestamp()
-    print(f"📨 on_mqtt_message_callback: timestamp:{timestamp} ")
-    timestamp_str = timestamp.strftime("%Y-%m-%d %H:%M:%S UTC")
-    topic = msg.topic
-    print(f"\n📨 [{timestamp_str}] Topic: {topic}")
-    print(f"📨 msg: {msg}")
+    # print(f"📨 on_mqtt_message_callback: timestamp:{timestamp} ")
+    # timestamp_str = timestamp.strftime("%Y-%m-%d %H:%M:%S UTC")
+    # topic = msg.topic
+    # print(f"\n📨 [{timestamp_str}] Topic: {topic}")
+    # print(f"📨 msg: {msg}")
 
     # Analizza il tipo di payload
     msg_parsed = parse_mqtt_payload(msg.payload)
