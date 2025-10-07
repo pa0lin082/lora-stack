@@ -115,7 +115,7 @@ def prepare_influxdb_point(data, timestamp=None):
         print(f"❌ try_to_import_message: data non è un messaggio JSON di Meshtastic")
         return
    
-    print(f"📨 try_to_import_message: point_dict:{print_json(point_dict)}")
+    # print(f"📨 try_to_import_message: point_dict:{print_json(point_dict)}")
    
     # Converti tutti i campi in point_dict['fields'] che sono float o integer in float
     if point_dict and 'fields' in point_dict:
@@ -134,15 +134,18 @@ def try_to_import_message( data, timestamp=None):
     if point_dict is None:
         return
 
+    share_poit_for_home_assistant(point_dict)
+
     if args.dry_run:
-        print(f"🚀 try_to_import_message dry-run -> point_dict: \n{print_json(point_dict)}")
+        # print(f"🚀 try_to_import_message dry-run -> point_dict: \n{print_json(point_dict)}")
         return
+    
     
     try:
         point = Point.from_dict(point_dict)
         # InfluxDB richiede sempre timestamp in UTC
         influxdb_client.write_api.write(bucket=config['INFLUXDB_BUCKET'], org=config['INFLUXDB_ORG'], record=point) 
-        print(f"💾 Risultato scrittura InfluxDB: {point} \n data: {print_json(point_dict)}")
+        print(f"💾 Point written in InfluxDB: {point}")
     except Exception as e:
         print(e)
         print(f"❌ Errore scrittura InfluxDB: {e} ")
@@ -150,7 +153,24 @@ def try_to_import_message( data, timestamp=None):
         print(f"🔍 Debug point: {point} \n data: {print_json(point_dict)}")
 
     return
-   
+
+def share_poit_for_home_assistant(point_dict):
+    """
+    Condividi il punto per Home Assistant.
+    """
+    print(f"🔍 share_poit_for_home_assistant: {point_dict}")
+
+    node_id = point_dict['tags']['node_id']
+
+    if point_dict['measurement'] in ['telemetry', 'custom_metrics']:
+        for key, value in point_dict['fields'].items():
+            topic = f"homeassitant/sensor/{node_id}/{key}"
+            print(f"🔍 topic: {topic} value: {value}")
+            mqtt_client.publish(topic, value)
+        
+
+    return
+
 def on_mqtt_message_callback(msg):
     """Callback chiamata quando viene ricevuto un messaggio."""
     timestamp = get_utc_timestamp()
@@ -166,7 +186,7 @@ def on_mqtt_message_callback(msg):
     if msg_parsed['type'] == 'json':
         try_to_import_message(msg_parsed['content'], timestamp)
     elif msg_parsed['type'] == 'text':
-        print(f"📦 skip msg type text")
+        print(f"📦 skip msg type text {print_json(msg_parsed)}")
         pass
         
     elif msg_parsed['type'] == 'protobuf':
