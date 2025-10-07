@@ -107,6 +107,8 @@ def prepare_influxdb_point(data, timestamp=None):
                 point_dict['measurement'] = 'custom_metrics'
                 for metric in data['payload']['metrics']:
                     point_dict['fields'][metric["name"]] = metric["value"]
+            else:
+                print(f"Recived text message: {print_json(data)}")
         else:   
             print(f"skipping message type: {data['type'] or 'unknown'}")
             # print(f"💾 Unknown type: {data['type']} \ndata: {json.dumps(data, indent=2, ensure_ascii=False)} \n point_dict: {json.dumps(point_dict, indent=2, ensure_ascii=False)}")
